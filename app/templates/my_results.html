@@ -1,0 +1,105 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/my_results.css')}}" />
+<table>
+    <tr>
+      <th></th>
+      <th>Puntuacion total</th>
+      <th>Agotamiento</th>
+      <th>Distancia mental</th>
+      <th>Deterioro emocional</th>
+      <th>Deterioro cognitivo</th>
+    </tr>
+    <tr class="low">
+      <td>Bajo</td>
+      <td>1.00 - 1.50</td>
+      <td>1.00 - 1.66</td>
+      <td>1.00</td>
+      <td>1.00</td>
+      <td>1.00 - 1.66</td>
+    </tr>
+    <tr class="average">
+      <td>Normal</td>
+      <td>1.51 - 2.35</td>
+      <td>1.67 - 2.99</td>
+      <td>1.01 - 2.65</td>
+      <td>1.01 - 2.00</td>
+      <td>1.67 - 2.33</td>
+    </tr>
+    <tr class="high">
+      <td>Alto</td>
+      <td>2.36 - 3.17</td>
+      <td>3.00 - 3.99</td>
+      <td>2.66 - 3.99</td>
+      <td>2.01 - 3.00</td>
+      <td>2.34 - 3.32</td>
+    </tr>
+    <tr class="very-high">
+      <td>Muy alto</td>
+      <td>3.18 - 5.00</td>
+      <td>4.00 - 5.00</td>
+      <td>4.00 - 5.00</td>
+      <td>3.01 - 5.00</td>
+      <td>3.33 - 5.00</td>
+    </tr>
+  </table>
+
+
+<hr>
+<h1>Mis resultados</h1><hr>
+<table>
+  <tr>
+      <th>Categoria</th>
+      <th>Bajo</th>
+      <th>Normal</th>
+      <th>Alto</th>
+      <th>Muy alto</th>
+  </tr>
+  <tr>
+      <td>Puntuacion total</td>
+      <td class="low">{{ info_dict["puntuacion_total"]["bajo"] }}</td>
+      <td class="average">{{ info_dict["puntuacion_total"]["normal"] }}</td>
+      <td class="high">{{ info_dict["puntuacion_total"]["alto"] }}</td>
+      <td class="very-high">{{ info_dict["puntuacion_total"]["muy_alto"] }}</td>
+  </tr>
+  <tr>
+      <td>Agotamiento</td>
+      <td class="low">{{ info_dict["agotamiento"]["bajo"] }}</td>
+      <td class="average">{{ info_dict["agotamiento"]["normal"] }}</td>
+      <td class="high">{{ info_dict["agotamiento"]["alto"] }}</td>
+      <td class="very-high">{{ info_dict["agotamiento"]["muy_alto"] }}</td>
+  </tr>
+  <tr>
+      <td>Distancia mental</td>
+      <td class="low">{{ info_dict["distancia_mental"]["bajo"] }}</td>
+      <td class="average">{{ info_dict["distancia_mental"]["normal"] }}</td>
+      <td class="high">{{ info_dict["distancia_mental"]["alto"] }}</td>
+      <td class="very-high">{{ info_dict["distancia_mental"]["muy_alto"] }}</td>
+  </tr>
+  <tr>
+      <td>Deterioro emocional</td>
+      <td class="low">{{ info_dict["deterioro_emocional"]["bajo"] }}</td>
+      <td class="average">{{ info_dict["deterioro_emocional"]["normal"] }}</td>
+      <td class="high">{{ info_dict["deterioro_emocional"]["alto"] }}</td>
+      <td class="very-high">{{ info_dict["deterioro_emocional"]["muy_alto"] }}</td>
+  </tr>
+  <tr>
+      <td>Deterioro cognitivo</td>
+      <td class="low">{{ info_dict["deterioro_cognitivo"]["bajo"] }}</td>
+      <td class="average">{{ info_dict["deterioro_cognitivo"]["normal"] }}</td>
+      <td class="high">{{ info_dict["deterioro_cognitivo"]["alto"] }}</td>
+      <td class="very-high">{{ info_dict["deterioro_cognitivo"]["muy_alto"] }}</td>
+  </tr>
+</table>
+
+<br>
+<hr>
+
+<textarea id="gpt4" type="text" name="gpt4" placeholder="Pregunta a WELLAI"></textarea>
+<button id="submitBTN" class="button" onclick="sendText()">Send</button>
+<hr>
+<div id="chat-container" class="paragraph"></div>
+
+<script src="{{ url_for('static', filename='js/my_results.js')}}"></script>
+{% endblock %}

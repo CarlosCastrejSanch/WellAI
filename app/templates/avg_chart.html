@@ -1,0 +1,67 @@
+<canvas id="avgChart" width="300" height="100"></canvas>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var info_dict = JSON.parse('{{ avg_data|tojson|safe }}');
+
+    var categories = Object.keys(info_dict);
+    var scoreLabels = ["bajo", "normal", "alto", "muy_alto"];
+
+    var datasets = [];
+    for (var i = 0; i < scoreLabels.length; i++) {
+        var data = [];
+        for (var j = 0; j < categories.length; j++) {
+            data.push(info_dict[categories[j]][scoreLabels[i]]);
+        }
+
+        var dataset = {
+            label: scoreLabels[i],
+            data: data,
+            backgroundColor: getBackgroundColor(i),
+            borderColor: getBorderColor(i),
+            borderWidth: 1
+        };
+
+        datasets.push(dataset);
+    }
+
+    var ctx2 = document.getElementById('avgChart').getContext('2d');
+    var avgChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: categories,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
+        }
+    });
+});
+
+function getBackgroundColor(index) {
+    var colors = ["rgba(54, 162, 235, 0.6)", "rgba(75, 192, 192, 0.6)", "rgba(255, 206, 86, 0.6)", "rgba(255, 99, 132, 0.6)"];
+    return colors[index % colors.length];
+}
+
+function getBorderColor(index) {
+    var colors = ["rgba(54, 162, 235, 1)", "rgba(75, 192, 192, 1)", "rgba(255, 206, 86, 1)", "rgba(255, 99, 132, 1)"];
+    return colors[index % colors.length];
+}
+</script>
+ 
+
+
+

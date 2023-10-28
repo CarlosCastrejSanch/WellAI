@@ -1,0 +1,71 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/table.css')}}" />
+<table id="emails-table">
+    <thead>
+      <tr>
+        <th>Email de empleado</th>
+        <th>Nombre de empleado</th>
+        <th>Rol</th>
+        <th>Genero</th>
+        <th>Doctor/Empleado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for employee in employee_list%}
+      <tr>
+        <td>{{employee.email}}</td>
+        <td>{{employee.name}}</td>
+        <td>{{employee.role}}</td>
+        <td>{{employee.gender}}</td>
+        {% if employee.is_doctor%}
+        <td>Doctor <button class="delete-btn" onclick="onDeleteClick('{{employee.id}}')">Borrar</button></td> 
+        {% else %}
+        <td>Employee <button class="delete-btn"  onclick="onDeleteClick('{{employee.id}}')">Borrar</button></td> 
+        {% endif %}
+      </tr>
+      {% endfor %}
+      <tr>
+        <td><input id="email" name="email" type="text" class="textInput" placeholder="Email"></td>
+        <td><input id="name" name="name" type="text" class="textInput" placeholder="Nombre"></td>
+        <td><input id="role" name="role" type="text" class="textInput" placeholder="Rol"></td>
+        <td><input id="gender" name="gender" type="text" class="textInput" placeholder="Genero"></td>
+        <td><input id="is_doctor" name="is_doctor" type="text" class="textInput" placeholder="Doctor/Empleado"></td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="add-button" onclick="onAddClick()">Añadir</button>
+
+
+<script>
+    function onAddClick() {
+    const mytable = document.getElementById('emails-table')
+    const email = document.getElementById('email').value;
+    const name = document.getElementById('name').value;
+    const role = document.getElementById('role').value;
+    const gender = document.getElementById('gender').value;
+    const is_doctor = document.getElementById('is_doctor').value;
+    fetch(`/add_email_to_list?email=${email}&name=${name}&role=${role}&gender=${gender}&is_doctor=${is_doctor}`)
+      .then(response => response.text())
+      .then(data => {
+        mytable.innerHTML = data;
+      });
+  }
+
+
+  function onDeleteClick(id) {
+    const mytable = document.getElementById('emails-table')
+
+    fetch(`/delete_email?id=${id}`)
+      .then(response => response.text())
+      .then(data => {
+        mytable.innerHTML = data;
+      });
+  }
+
+
+
+</script>
+  
+{% endblock %}

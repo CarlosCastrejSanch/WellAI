@@ -1,0 +1,60 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<h1>Promedio</h1>
+<hr><br>
+{% include 'avg_chart.html' %} 
+<hr><br>
+
+<hr><br>
+
+
+<h1>Respuestas</h1>
+
+<select id="question-select" class="postbtn">
+    <option value="All">Todo</option>
+    {% for question in list_questions %}
+    <option value="{{question}}">{{question}}</option>
+    {% endfor %}
+</select>
+
+
+
+<select id="last-submit-select" class="postbtn">
+    <option value="all-submissions" selected="selected">Todas los resultados</option>
+    <option value="last-one">Ultimos resultados</option>
+    <option value="last-tow">Ultimos 2 resultados</option>
+    <option value="last-three">Ultimos 3 resultados</option>
+    <option value="last-four">Ultimos 4 resultados</option>
+    <option value="last-five">Ultimos 5 resultados</option>
+    <option value="last-six">Ultimos 6 resultados</option>
+    <option value="last-seven">Ultimos 7 resultados</option>
+    <option value="last-eight">Ultimos 8 resultados</option>
+    <option value="last-nine">Ultimos 9 resultados</option>
+</select>
+
+<select id="role-select" class="postbtn">
+    <option value="all-roles" selected="selected">Todos los roles</option>
+    {% for role in roles %}
+    <option value="{{role}}">{{role}}</option>
+    {% endfor %}
+</select>
+
+<select id="gender-select" class="postbtn">
+    <option value="all-genders" selected="selected">Todos los generos</option>
+    <option value="Male">Hombre</option>
+    <option value="Female">Mujer</option>
+
+</select>
+
+
+<div id="my-data">
+    {% include 'bar_chart.html' %}
+
+</div>
+
+<script src="{{ url_for('static', filename='js/dashboard.js')}}"></script>
+
+{% endblock %}

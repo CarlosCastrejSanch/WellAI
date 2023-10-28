@@ -1,0 +1,66 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/table.css')}}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/card.css')}}" />
+
+<input id="email" name="email" type="text" class="textInput" placeholder="Email" value="{{user.email}}">
+<input id="name" name="name" type="text" class="textInput" placeholder="Nombre" value="{{user.username}}">
+{%if user.is_doctor %}
+<input id="is_doctor" name="is_doctor" type="text" class="textInput" placeholder="Doctor/Empleado" value="Doctor">
+{% else %}
+<input id="is_doctor" name="is_doctor" type="text" class="textInput" placeholder="Doctor/Empleado" value="Employee">
+{% endif %}
+
+<label for="checkbox">¿Quieres dar acceso a tu informacion al doctor?</label>
+{% if user.doctor_access %}
+<input type="checkbox" name="checkbox"  id="checkbox" checked >
+{% else %}
+<input type="checkbox" name="checkbox"  id="checkbox">
+{% endif %}
+
+<button class="add-button" onclick="updateProfile()">Guardar</button>
+
+
+
+
+
+<script>
+
+function updateProfile() {
+    const message = document.getElementById('flash-message')
+
+    const email = document.getElementById('email').value;
+    const name = document.getElementById('name').value;
+    const checkbox = document.getElementById('checkbox').checked;
+    const is_doctor = document.getElementById('is_doctor').value;
+    fetch(`/updateEmployee?email=${email}&name=${name}&is_doctor=${is_doctor}&checkbox=${checkbox}`)
+      .then(response => response.text())
+      .then(data => {
+        message.innerHTML = data;
+      });
+  }
+
+</script>
+
+
+
+<div id="flash-message">
+{% with messages = get_flashed_messages(with_categories=true)%}
+{% if messages %}
+  {%  for category, message in messages%}
+  {% if category == 'error' %}
+    <div class="error"  >
+      {{ message }}
+    </div>
+    {% else %}
+    <div class="success" >
+      {{ message }}
+    </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% endwith %}
+</div>
+
+{% endblock %}

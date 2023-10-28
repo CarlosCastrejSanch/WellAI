@@ -1,0 +1,62 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/table.css')}}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css')}}" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% for employee in doctor_employees %}
+
+
+<div class="card">
+    <div class="card-header">{{employee.username}}</div>
+    <div class="card-body">
+        <button onclick="showEmployeeInfo('{{employee.id}}')" id="displayInfoBtn" class="add-button">Ver informacion</button>
+    </div>
+</div>
+
+{% endfor %}
+
+<div id="employeeInfoModal" class="modal">
+  
+  
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span id="closeInfoModal" class="close">&times;</span>
+
+
+
+
+      <h1>Respuestas promedio</h1>
+      <hr><br>
+      <canvas id="avgChart" width="300" height="100"></canvas>
+
+      <hr><br>
+
+
+      <hr><br>
+      <h1>Respuestas</h1>
+      <hr>
+      <select id="time-select" class="postbtn">
+        <option value="all-time" selected="selected">Todo</option>
+        <option value="last-15mins">Ultimos 15 minutos</option>
+        <option value="last-30mins">Ultimos 30 minutos</option>
+        <option value="last-hour">Ultima hora</option>
+        <option value="last-24hours">Ultimas 24 horas</option>
+        <option value="last-2days">Ultimos 2 dias</option>
+        <option value="last-5days">Ultimos 5 dias</option>
+        <option value="last-week">Ultima semana</option>
+        <option value="last-month">Ultimo mes</option>
+    </select>
+        {% include 'bar_chart.html' %}
+        <br><br>
+    </div>
+
+
+    
+
+
+  
+  </div>
+
+  <script src="{{ url_for('static', filename='js/employee_info_modal.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css')}}">
+
+
+{% with messages = get_flashed_messages(with_categories=true)%}
+{% if messages %}
+  {%  for category, message in messages%}
+  {% if category == 'error' %}
+    <div class="error"  >
+      {{ message }}
+    </div>
+    {% else %}
+    <div class="success" >
+      {{ message }}
+    </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+<a href="{{url_for('home')}}" class="back-button">
+    <div class="back-arrow"></div>
+</a>
+<div class="form-container">
+    <h1>Registrarse</h1>
+    <form action="/register" method="post">
+        <input type="text" name="name" placeholder="Nombre" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit">Registrarse</button>
+    </form>
+    <p>¿Ya tienes cuenta? <a href="{{url_for('login')}}">Accede aqui</a></p>
+</div>
+
+{% endblock %}

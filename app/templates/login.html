@@ -1,0 +1,30 @@
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css')}}">
+<a href="{{url_for('home')}}" class="back-button">
+    <div class="back-arrow"></div>
+</a>
+<div class="form-container">
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        <input type="text" name="email" placeholder="Introduce tu email" required>
+        <input type="password" name="password" placeholder="Introduce tu contraseña" required>
+        <button type="submit">Login</button>
+    </form>
+    <p>¿No tienes cuenta? <a href="{{url_for('register')}}">Registrate aqui</a></p>
+</div>
+{% with messages = get_flashed_messages(with_categories=true)%}
+{% if messages %}
+  {%  for category, message in messages%}
+  {% if category == 'error' %}
+    <div class="error"  >
+      {{ message }}
+    </div>
+    {% else %}
+    <div class="success" >
+      {{ message }}
+    </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% endwith %}
+{% endblock%}

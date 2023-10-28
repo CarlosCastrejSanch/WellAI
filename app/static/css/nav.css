@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eee;
+    margin: 0;
+    padding: 0;
+    }
+    
+    .navbar {
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 0 20px;
+    }
+
+    /* Container */
+.container {
+    max-width: 1500px;
+    width: 100%;
+    width: calc(100% - 1rem);
+    margin: 50px auto;
+    padding: 50px;
+    background: #ccc;
+  }
+
+    
+    .logo {
+    font-weight: bold;
+    font-size: 24px;
+    margin-right: 30px;
+    }
+    
+    .navbar a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 18px;
+    }
+    
+    .navbar a:hover {
+    text-decoration: underline;
+    }
+    
+    .search-form {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    }
+    
+    .search-form input[type="text"] {
+    padding: 5px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    }
+    
+    .search-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    }
+    
+    .login-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+    
+    .login-button:hover {
+    background-color: #3e8e41;
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+    
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+    
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
+    
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+    
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+
+
+
+.info,
+.success,
+.warning,
+.error-msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+}
+.info {
+  color: #059;
+  background-color: #bef;
+}
+.success {
+  color: #270;
+  background-color: #dff2bf;
+}
+.warning {
+  color: #9f6000;
+  background-color: #feefb3;
+}
+.error {
+  color: #d8000c;
+  background-color: #ffbaba;
+}

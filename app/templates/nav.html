@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css')}}">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <title>WellAI</title>
+</head>
+<body>
+
+
+    <div class="navbar">
+		
+		
+
+		{% if user.is_corp %}
+		<a href="{{url_for('dashboard')}}" class="logo"><img style="max-width: 50px; margin-left: 20px;" src="{{ url_for('static', filename='imgs/user2.png')}}" alt=""></a>
+		<a href="{{url_for('dashboard')}}">Dashboard</a>
+		<a href="{{url_for('corporation')}}">Lista de empleados</a>
+		{% endif %}
+
+		{% if user.is_doctor %}
+		<a href="{{url_for('dashboard')}}" class="logo"><img style="max-width: 50px; margin-left: 20px;" src="{{ url_for('static', filename='imgs/user2.png')}}" alt=""></a>
+		<a href="{{url_for('dashboard')}}">Dashboard</a>
+		<a href="{{url_for('doctor_employees')}}">Info empleados</a>
+		{% endif %}
+
+		{% if user.is_employee %}
+		<a href="{{url_for('home')}}" class="logo"><img style="max-width: 50px; margin-left: 20px;" src="{{ url_for('static', filename='imgs/user2.png')}}" alt=""></a>
+		<a href="{{url_for('dashboard')}}">Dashboard</a>
+		<a href="{{url_for('home')}}">Cuestionario</a>
+		<a href="{{url_for('employee_profile')}}">Mi perfil</a>
+		<a href="{{url_for('my_results')}}">Mis resultados</a>
+		{% endif %}
+
+		<div class="search-form"></div>
+		{% if user.is_authenticated %}
+			<h3 style="margin-right: 30px;">Bienvenido: <strong>{{user.username}}</strong></h3> 
+			<a href="{{url_for('logout')}}" class="login-button">Logout</a>
+		{% else %}
+			<a href="{{url_for('login')}}" class="login-button">Login</a>
+		{% endif %}
+	</div>
+
+
+	
+	
+	<section class="container">
+    {%block content%}
+    {%endblock%}
+	</section>
+
+
+		   
+
+</body>
+</html>
